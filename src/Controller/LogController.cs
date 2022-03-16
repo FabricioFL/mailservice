@@ -7,7 +7,7 @@ namespace MailService.Controller
     {
         public static void AppendLog(string data)
         {
-            var filepath = $"Data{Path.DirectorySeparatorChar}log.txt";
+            var filepath = $"src{Path.DirectorySeparatorChar}Data{Path.DirectorySeparatorChar}log.txt";
             using(var fs = File.AppendText(filepath))
             {
                 fs.Write(Environment.NewLine);
@@ -20,7 +20,7 @@ namespace MailService.Controller
 
         public static bool IsFailureLog()
         {
-            var filepath = $"..{Path.DirectorySeparatorChar}Data{Path.DirectorySeparatorChar}log.txt";
+            var filepath = $"src{Path.DirectorySeparatorChar}Data{Path.DirectorySeparatorChar}log.txt";
             var logText = File.ReadAllText(filepath);
             if(logText.Contains("failure") || logText.Contains("fail") || logText.Contains("error"))
             {
