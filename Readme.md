@@ -1,4 +1,2 @@
 # API de emails
 
->## Endpoints:
-
