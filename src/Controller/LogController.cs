@@ -1,34 +1,29 @@
-using System.Data;
-using System.IO;
-
 namespace MailService.Controller
 {
     class Log
     {
         public static void AppendLog(string data)
         {
-            var filepath = $"src{Path.DirectorySeparatorChar}Data{Path.DirectorySeparatorChar}log.txt";
-            using(var fs = File.AppendText(filepath))
+            var filepath = $"src{Path.DirectorySeparatorChar}Data{Path.DirectorySeparatorChar}errors.log";
+            using(var file = File.AppendText(filepath))
             {
-                fs.Write(Environment.NewLine);
-                fs.Write(Environment.NewLine);
-                fs.Write(DateTime.Now);
-                fs.Write(Environment.NewLine);
-                fs.Write(data);
+                file.Write(Environment.NewLine);
+                file.Write(Environment.NewLine);
+                file.Write(DateTime.Now);
+                file.Write(Environment.NewLine);
+                file.Write(data);
             }
         }
 
         public static bool IsFailureLog()
         {
-            var filepath = $"src{Path.DirectorySeparatorChar}Data{Path.DirectorySeparatorChar}log.txt";
+            var filepath = $"src{Path.DirectorySeparatorChar}Data{Path.DirectorySeparatorChar}errors.log";
             var logText = File.ReadAllText(filepath);
             if(logText.Contains("failure") || logText.Contains("fail") || logText.Contains("error"))
             {
                 return true;
-            }else
-            {
-                return false;
             }
+            return false;
         }
     }
 }

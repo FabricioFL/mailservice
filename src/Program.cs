@@ -4,7 +4,7 @@ using MailService.Controller;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("/", () => "Select a valid endpoint, to see the endpoints check: {value}");
+app.MapGet("/", () => "Invalid route!");
 
 app.MapPost("/receive", (User user) => {
     var mail = new Mail();
@@ -15,10 +15,8 @@ app.MapPost("/receive", (User user) => {
     if(user.user == builder.Configuration.GetValue<string>("mailuser") && user.password == builder.Configuration.GetValue<string>("mailpassword"))
     {
         return mail.ReadMail();
-    }else
-    {
-        return "Invalid endpoint!";
     }
+    return "Invalid endpoint!";
 });
 
 app.MapPost("/send", (Destinatary destinatary) => {
